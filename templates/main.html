@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" href="css/style.css" type="text/css"/>
+  <title>Debian Diaspora packaging status</title>
+</head>
+<body>
+  <div id="percent">Progress : {{ percent_complete }}
+    <br/>Done: {{gem_done}}
+    <br/>Not Done: {{gem_not_done}}
+  </div>
+
+  {% for color, value in colors.items() %}
+    <table id="{{ color }}">
+      <tr>
+        <td class="title">{{ value }}</td>
+      </tr>
+      {% for gem, status in gem_status.items() %}
+          {% if status == value %}
+          <tr>
+          <td class="gem">{{ gem }}</td>
+          </tr>
+          {% endif %}
+      {% endfor %}
+    </table>
+  {% endfor %}
+</body>

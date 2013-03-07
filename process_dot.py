@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import re, sys
+from jinja2 import Template, Environment, FileSystemLoader
 
 """
     Process dot file and categorize gems.
@@ -72,17 +73,9 @@ for gem in gem_list:
 total = gem_done+gem_not_done
 percent_complete = (float(gem_done)/float(total))*100.0
 
+env = Environment(loader=FileSystemLoader('templates'))
+template = env.get_template('main.html')
+render = template.render(locals())
 
-status_file = open("status.html", "w")
-status_file.write("<html>")
-status_file.write("<head><link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\"/><title>Debian Diaspora packaging status</title></head><body><div id=\"percent\">Progress : "+str(percent_complete)+"<br/>Done: "+str(gem_done)+"<br/>Not Done: "+str(gem_not_done)+"</div>")
-for color in colors:
-    status = colors[color]
-    status_file.write("\n<table id="+status+"><tr><td class=\"title\">"+status+"</td></tr>")
-    #if status is of current color, write
-    for gem in gem_status:
-        if gem_status[gem] == status:
-            status_file.write('<tr><td class="gem">' + gem + '</tr></td>')
-    status_file.write('\n</table>')
-status_file.write("</body></html>")
-status_file.close()
+with open("status.html", "w") as file:
+    file.write(render)
