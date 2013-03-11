@@ -1,26 +1,61 @@
 <!DOCTYPE html>
 <head>
+  <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
+  <link rel="stylesheet" href="css/theme.bootstrap.css" type="text/css"/>
   <link rel="stylesheet" href="css/style.css" type="text/css"/>
   <title>Debian Diaspora packaging status</title>
+  <script>
+  $(function(){
+    $('table').tablesorter({
+      theme : "bootstrap",
+      usNumberFormat : false,
+      sortReset      : true,
+      sortRestart    : true
+    });
+  });
+  </script>
 </head>
-<body>
-  <div id="percent">Progress : {{ percent_complete }}
-    <br/>Done: {{gem_done}}
-    <br/>Not Done: {{gem_not_done}}
-  </div>
+<body class="container">
+  <div class="row header">
+    <div class="wrapper clearfix">
+      <div class="span1">
+        Total <h2>{{total}}<h2>
+      </div>
+      <div class="span1">
+        Packaged <h2>{{gem_done}}<h2>
+      </div>
+      <div class="span1">
+        ITP <h2>{{gem_itp}}</h2>
+      </div>
+      <div class="span1">
+        Not taken <h2>{{gem_not_done}}</h2>
+      </div>
+      <div class="span1">
+        Progress <h2>{{percent_complete}}</h2>
+      </div>
+    </div>
 
-  {% for color, value in colors.items() %}
-    <table id="{{ color }}">
-      <tr>
-        <td class="title">{{ value }}</td>
-      </tr>
+    <div class="progress progress-striped">
+      <div class="bar bar-success" style="width: {{gem_done*100/total}}%;"></div>
+      <div class="bar bar-warning" style="width: {{gem_itp*100/total}}%"></div>
+      <div class="bar bar-danger" style="width: {{gem_not_done*100/total}}%;"></div>
+    </div>
+  </div>
+  <div class="row well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="sorting">Gem</th>
+          <th class="sorting">Status</th>
+        </tr>
+      </thead>
       {% for gem, status in gem_status.items() %}
-          {% if status == value %}
-          <tr>
-          <td class="gem">{{ gem }}</td>
-          </tr>
-          {% endif %}
+        <tr class="{{ status }}">
+          <td>{{ gem }}</td>
+          <td>{{ status }}</td>
       {% endfor %}
     </table>
-  {% endfor %}
+  </div>
 </body>

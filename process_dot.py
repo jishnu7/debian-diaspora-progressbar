@@ -13,11 +13,11 @@ dot_file_name = sys.argv[1]
 dot_file = open(dot_file_name)
 gem_list = set()  # empty set
 #color of node and status
-colors = {'black': 'unpackaged',
+colors = {'black': 'Unpackaged',
           'orange': "ITP",
           'purple': "RFP",
-          'yellow': "new",
-          'green': "present"
+          'yellow': "New",
+          'green': "Present"
           }
 
 #add anything is quotes to set
@@ -65,13 +65,16 @@ for gem in gem_list:
 # or waiting in new is in.
 gem_done = 0
 gem_not_done = 0
+gem_itp = 0
 for gem in gem_list:
-    if gem_status[gem] in ['new', 'present']:
+    if gem_status[gem] in ['New', 'Present']:
         gem_done = gem_done + 1
+    elif gem_status[gem] == 'ITP':
+        gem_itp += 1
     else:
         gem_not_done = gem_not_done + 1
-total = gem_done+gem_not_done
-percent_complete = (float(gem_done)/float(total))*100.0
+total = gem_done+gem_not_done+gem_itp
+percent_complete = round(gem_done*100.0/total, 2)
 
 env = Environment(loader=FileSystemLoader('templates'))
 template = env.get_template('main.html')

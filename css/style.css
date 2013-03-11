@@ -1,56 +1,10 @@
-.title{
-    color: red;
+.header {
+    margin-top: 40px;
+}
+.wrapper {
+    width: 400px;
+    margin: 0 auto;
+}
+.span1 {
     text-align: center;
-    font-weight: bold;
-}
-
-.gem{
-    text-align: center;
-}
-
-.gem:hover{
-    background-color: lightblue;
-    border-radius: 5px;
-}
-
-#percent{
-    position:absolute;
-    top:0%;
-    width:100%;
-    height:15%;
-    text-align:center;
-    font-weight: bold;
-}
-
-table{
-    position: absolute;
-    top:15%;
-    width: 20%;
-    border-radius: 5px;
-    text-align: center;
-}
-
-#ITP{
-    left:0%;
-    color: darkorange;
-}
-
-#present{
-    left:20%;
-    color: green;
-}
-
-#unpackaged{
-    left:40%;
-    color: black;
-}
-
-#RFP{
-    left:60%;
-    color: purple;
-}
-
-#new{
-    left:80%;
-    color:darkgoldenrod;
 }
