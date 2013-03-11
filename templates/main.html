@@ -2,14 +2,25 @@
 <head>
   <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+  <script type="text/javascript" src="js/jquery.tablesorter.widgets.min.js"></script>
   <link rel="stylesheet" href="css/bootstrap.css" type="text/css"/>
   <link rel="stylesheet" href="css/theme.bootstrap.css" type="text/css"/>
   <link rel="stylesheet" href="css/style.css" type="text/css"/>
   <title>Debian Diaspora packaging status</title>
   <script>
   $(function(){
+    $.extend($.tablesorter.themes.bootstrap, {
+      table      : 'table table-bordered',
+      header     : 'bootstrap-header',
+      sortNone   : 'bootstrap-icon-unsorted',
+      sortAsc    : 'icon-chevron-up',
+      sortDesc   : 'icon-chevron-down',
+    });
+
     $('table').tablesorter({
       theme : "bootstrap",
+      headerTemplate : '{content} {icon}',
+      widgets : [ "uitheme" ],
       usNumberFormat : false,
       sortReset      : true,
       sortRestart    : true
@@ -18,6 +29,8 @@
   </script>
 </head>
 <body class="container">
+  <h1>Debian Diaspora Packaging Status</h1>
+  <hr/>
   <div class="row header">
     <div class="wrapper clearfix">
       <div class="span1">
@@ -44,11 +57,11 @@
     </div>
   </div>
   <div class="row well">
-    <table class="table">
+    <table class="table table-bordered tablesorter">
       <thead>
         <tr>
-          <th class="sorting">Gem</th>
-          <th class="sorting">Status</th>
+          <th>Gem</th>
+          <th>Status</th>
         </tr>
       </thead>
       {% for gem, status in gem_status.items() %}
