@@ -80,5 +80,5 @@ env = Environment(loader=FileSystemLoader('templates'))
 template = env.get_template('main.html')
 render = template.render(locals())
 
-with open("status.html", "w") as file:
+with open("index.html", "w") as file:
     file.write(render)
