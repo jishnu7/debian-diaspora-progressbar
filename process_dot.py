@@ -12,12 +12,12 @@ from jinja2 import Environment, FileSystemLoader
 dot_file_name = sys.argv[1]
 dot_file = open(dot_file_name)
 gem_list = set()  # empty set
-#color of node and status
-colors = {'black': 'Unpackaged',
-          'orange': "ITP",
-          'purple': "RFP",
-          'yellow': "New",
-          'green': "Present"
+#color of node, status and css class
+colors = {'black': ['Unpackaged', 'error'],
+          'orange': ['ITP', 'warning'],
+          'purple': ['RFP', 'info'],
+          'yellow': ['New', 'success'],
+          'green': ['Present', 'success']
           }
 
 #add anything is quotes to set
@@ -67,9 +67,9 @@ gem_done = 0
 gem_not_done = 0
 gem_itp = 0
 for gem in gem_list:
-    if gem_status[gem] in ['New', 'Present']:
+    if gem_status[gem][0] in ['New', 'Present']:
         gem_done = gem_done + 1
-    elif gem_status[gem] == 'ITP':
+    elif gem_status[gem][0] == 'ITP':
         gem_itp += 1
     else:
         gem_not_done = gem_not_done + 1

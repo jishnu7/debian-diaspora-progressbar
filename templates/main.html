@@ -65,9 +65,9 @@
         </tr>
       </thead>
       {% for gem, status in gem_status.items() %}
-        <tr class="{{ status }}">
+        <tr class="{{ status[1] }}">
           <td>{{ gem }}</td>
-          <td>{{ status }}</td>
+          <td>{{ status[0] }}</td>
       {% endfor %}
     </table>
   </div>
