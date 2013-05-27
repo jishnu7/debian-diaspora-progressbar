@@ -1,0 +1,29 @@
+#!/bin/bash
+# Copy this file to /etc/cron.daily
+
+# Set paths for gemdeps and progressbar code
+BASE_PATH=/home/anish/diaspora
+GEMDEPS_PATH=${BASE_PATH}/gemdeps
+PROGRESSBAR_PATH=${BASE_PATH}/progressbar
+WEBSERVER_PATH=/var/www/diaspora.html
+
+# Check if an old .dot file is present
+ls ${BASE_PATH}/*.dot >/dev/null 2>&1
+
+if [[ $? -eq 0 ]]
+then
+				# Clean up old files
+        rm ${BASE_PATH}/*.dot ${BASE_PATH}/gemlist*
+fi
+
+# Generate .dot file with gemdeps-diaspora
+cd ${BASE_PATH}
+ruby -I ${GEMDEBS_PATH}/lib/ ${GEMDEBS_PATH}/bin/gemdeps-diaspora
+
+# Read .dot file and create html page
+cd ${PROGRESSBAR_PATH}
+python ${PROGRESSBAR_PATH}/process_dot.py ${BASE_PATH}/diaspora_deps*.dot
+
+# Copy html file to webserver path
+cp ${PROGRESSBAR_PATH}/index.html ${WEBSERVER_PATH}
+
