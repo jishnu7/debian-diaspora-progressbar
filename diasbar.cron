@@ -18,7 +18,7 @@ fi
 
 # Generate .dot file with gemdeps-diaspora
 cd ${BASE_PATH}
-ruby -I ${GEMDEBS_PATH}/lib/ ${GEMDEBS_PATH}/bin/gemdeps-diaspora
+ruby -I ${GEMDEPS_PATH}/lib/ ${GEMDEPS_PATH}/bin/gemdeps-diaspora
 
 # Read .dot file and create html page
 cd ${PROGRESSBAR_PATH}
