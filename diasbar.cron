@@ -3,9 +3,9 @@
 
 # Set paths for gemdeps and progressbar code
 BASE_PATH=/home/anish/diaspora
-GEMDEPS_PATH=${BASE_PATH}/gemdeps
 PROGRESSBAR_PATH=${BASE_PATH}/progressbar
 WEBSERVER_PATH=/var/www/diaspora.html
+DOT_FILE_PATH="http://people.debian.org/~boutil/diaspora/diaspora_deps20130529.dot"
 
 # Check if an old .dot file is present
 ls ${BASE_PATH}/*.dot >/dev/null 2>&1
@@ -16,9 +16,8 @@ then
         rm ${BASE_PATH}/*.dot ${BASE_PATH}/gemlist*
 fi
 
-# Generate .dot file with gemdeps-diaspora
-cd ${BASE_PATH}
-ruby -I ${GEMDEPS_PATH}/lib/ ${GEMDEPS_PATH}/bin/gemdeps-diaspora
+# get .dot file from boutil's server
+wget ${DOT_FILE_PATH}
 
 # Read .dot file and create html page
 cd ${PROGRESSBAR_PATH}
