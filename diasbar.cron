@@ -17,14 +17,14 @@ then
         rm ${BASE_PATH}/*.dot ${BASE_PATH}/gemlist*
 fi
 
-echo "Getting ${DOT_FILE_NAME} from boutil's server"
+echo "Getting ${DOT_FILE_NAME} from boutil's server..."
 cd ${BASE_PATH}
 wget ${DOT_FILE_PATH}
 
-echo "Reading ${DOT_FILE_NAME} and creating html page
+echo "Reading ${DOT_FILE_NAME} and creating html page..."
 cd ${PROGRESSBAR_PATH}
 python ${PROGRESSBAR_PATH}/process_dot.py ${BASE_PATH}/${DOT_FILE_NAME}
 
-echo "Copying html file to webserver path"
+echo "Copying html file to webserver path..."
 cp ${PROGRESSBAR_PATH}/index.html ${WEBSERVER_PATH}
 
