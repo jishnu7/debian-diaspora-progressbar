@@ -1,30 +1,30 @@
 #!/bin/bash
 # Copy this file to /etc/cron.daily
 
-# Set paths for gemdeps and progressbar code
+echo "Setting paths for gemdeps, progressbar, webserver and dot file..."
 BASE_PATH=/home/anish/diaspora
 PROGRESSBAR_PATH=${BASE_PATH}/progressbar
 WEBSERVER_PATH=/var/www/diaspora.html
 DOT_FILE_PATH="http://people.debian.org/~boutil/diaspora/diaspora-deps-latest.dot"
 DOT_FILE_NAME=diaspora-deps-latest.dot
 
-# Check if an old .dot file is present
+echo "Checking if an old .dot file is present..."
 ls ${BASE_PATH}/${DOT_FILE_NAME} >/dev/null 2>&1
 
 if [[ $? -eq 0 ]]
 then
-				# Clean up old files
+				echo "Cleaning up old files..."
         rm ${BASE_PATH}/*.dot ${BASE_PATH}/gemlist*
 fi
 
-# get .dot file from boutil's server
+echo "Getting ${DOT_FILE_NAME} from boutil's server"
 cd ${BASE_PATH}
 wget ${DOT_FILE_PATH}
 
-# Read .dot file and create html page
+echo "Reading ${DOT_FILE_NAME} and creating html page
 cd ${PROGRESSBAR_PATH}
 python ${PROGRESSBAR_PATH}/process_dot.py ${BASE_PATH}/${DOT_FILE_NAME}
 
-# Copy html file to webserver path
+echo "Copying html file to webserver path"
 cp ${PROGRESSBAR_PATH}/index.html ${WEBSERVER_PATH}
 
