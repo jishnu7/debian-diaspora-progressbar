@@ -5,11 +5,11 @@
 BASE_PATH=/home/anish/diaspora
 PROGRESSBAR_PATH=${BASE_PATH}/progressbar
 WEBSERVER_PATH=/var/www/diaspora.html
-DOT_FILE_PATH="http://people.debian.org/~boutil/diaspora/diaspora_deps20130529.dot"
-DOT_FILE_NAME=diaspora_deps20130529.dot
+DOT_FILE_PATH="http://people.debian.org/~boutil/diaspora/diaspora_deps-latest.dot"
+DOT_FILE_NAME=diaspora_deps-latest.dot
 
 # Check if an old .dot file is present
-ls ${BASE_PATH}/*.dot >/dev/null 2>&1
+ls ${BASE_PATH}/${DOT_FILE_NAME} >/dev/null 2>&1
 
 if [[ $? -eq 0 ]]
 then
