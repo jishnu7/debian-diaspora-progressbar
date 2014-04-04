@@ -37,7 +37,7 @@ dot_file.seek(0)  # reset
 #regular expression to match
 #"gem" [color="color"];
 re1 = '.*?'	 # Non-greedy match on filler
-re2 = '((?:[a-z][a-z0-9_\-]+))'	 # Word 1
+re2 = '((?:[a-z][a-z0-9_\-\.]+))'	 # Word 1
 re3 = '.*?'	 # Non-greedy match on filler
 re4 = '(color)'	 # Variable Name 1
 re5 = '.*?'	 # Non-greedy match on filler
