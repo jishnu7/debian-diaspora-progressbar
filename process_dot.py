@@ -19,11 +19,14 @@ colors = {'black': ['Unpackaged', 'error'],
           'yellow': ['New', 'success'],
           'green': ['Present', 'success']
           }
+#skip these gems
+skip = ['mini_portile']
 
 #add anything is quotes to set
 matches = re.findall(r'\"(.+?)\"', dot_file.read())
 for match in matches:
-    gem_list.add(match)
+    if match not in skip:
+        gem_list.add(match)
 
 # Remove colors, which is also in quotes
 for color in colors:
